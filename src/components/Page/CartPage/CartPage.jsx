@@ -2,7 +2,8 @@ import Banner from '../../Banner';
 import {useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
-import {removeCartItems, sendOrder} from '../../../actions/actionsCreators';
+import {removeCartItems} from '../../../redux/Cart/actionCreators';
+import {sendOrder} from '../../../utils/api';
 import Preloader from '../../Preloader';
 
 const CartPage = () => {

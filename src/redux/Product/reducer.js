@@ -4,7 +4,7 @@ import {
   FETCH_ITEM_FAILURE,
   CHANGE_SIZE_ITEM,
   CHANGE_COUNT_ITEM
-} from '../actions/actionsTypes';
+} from './actionType';
 
 const initalState = {
   item: null,

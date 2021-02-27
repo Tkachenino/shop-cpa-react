@@ -1,10 +1,10 @@
-// import {useStorage} from '../../../hooks/useStorage';
-
 import {useEffect} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
-import {getItem, changeSizeItem, changeCountItem, setCartItems} from '../../../actions/actionsCreators';
+import {changeSizeItem, changeCountItem} from '../../../redux/Product/actionCreators';
+import {setCartItems} from '../../../redux/Cart/actionCreators';
 
+import {getItem} from '../../../utils/api';
 import Banner from '../../Banner';
 import Preloader from '../../Preloader';
 
@@ -19,7 +19,7 @@ const ProductPage = () => {
     }, [dispatch, id])
 
     const saveProduct = () => {
-        dispatch(setCartItems({id, count: count, size: size, price: item.price, title: item.title}));     
+        dispatch(setCartItems({id: Number(id), count: count, size: size, price: item.price, title: item.title}));     
         history.push('/cart');
     }
 

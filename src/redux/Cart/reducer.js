@@ -1,24 +1,19 @@
 import {
-  SET_LOCAL_CART_ITEMS,
   SET_CART_ITEMS,
   REMOVE_CART_IETMS,
   FETCH_ORDER_REQUEST,
   FETCH_ORDER_SUCCESS,
   FETCH_ORDER_FAILURE
-} from '../actions/actionsTypes';
+} from './actionType';
 
 const initalState = {
-  cartItems: [],
+  cartItems: JSON.parse(localStorage.getItem('cart')) || [],
   loading: false,
   error: null
 }
 
 export const CartReducer = (store = initalState, action) => {
   switch (action.type) {
-    case SET_LOCAL_CART_ITEMS: {
-      const items = action.payload.items;
-      return ({cartItems: JSON.parse(items)}) 
-    }
     case SET_CART_ITEMS: {
       const items = action.payload.items;
 

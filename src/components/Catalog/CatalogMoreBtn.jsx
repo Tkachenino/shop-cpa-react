@@ -1,5 +1,5 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {getMoreItems} from '../../actions/actionsCreators';
+import {getMoreItems} from '../../utils/api';
 import Preloader from '../Preloader';
 
 const CatalogMoreBtn = () => {

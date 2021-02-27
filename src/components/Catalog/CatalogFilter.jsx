@@ -1,6 +1,8 @@
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getCategories, changeActiveCategory} from '../../actions/actionsCreators'
+import {changeActiveCategory} from '../../redux/Catalog/actionCreators';
+import {getCategories} from '../../utils/api';
+
 
 const CatalogFilter = () => {
     const {categories, active, error, loading} = useSelector(store => store.catalog);

@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {NavLink, useHistory, useLocation} from 'react-router-dom';
-import {setSearch, setLocalCartItems} from '../../actions/actionsCreators';
+import {setSearch} from '../../redux/Catalog/actionCreators';
 import Logo from '../../assets/img/header-logo.png';
 
 const Header = () => {
@@ -28,13 +28,6 @@ const Header = () => {
       setIsSearch(prevState => !prevState);
     }
   }
-
-  useEffect(() => {
-    const localCartItems = localStorage.getItem('cart');
-    if (localCartItems) {
-      dispatch(setLocalCartItems(localCartItems))
-    }
-  }, [])
 
   useEffect(()=> {
     if (isSearch) {

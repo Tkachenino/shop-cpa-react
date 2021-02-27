@@ -13,7 +13,7 @@ import {
   FETCH_SEARCH_ITEMS_SUCCESS,
   FETCH_SEARCH_ITEMS_FAILURE,
   SET_SEARCH
-} from '../actions/actionsTypes';
+} from './actionType';
 
 const initalState = {
   categories: [{id: 1, title: 'Все'}],

@@ -2,7 +2,7 @@ import {
   FETCH_TOP_SALES_REQUEST,
   FETCH_TOP_SALES_SUCCESS,
   FETCH_TOP_SALES_FAILURE
-} from '../actions/actionsTypes';
+} from './actionType';
 
 const initalState = {
   items: [],

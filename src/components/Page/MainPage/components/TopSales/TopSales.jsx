@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getTopSales} from '../../../../../actions/actionsCreators'
+import {getTopSales} from '../../../../../utils/api'
 import Preloader from '../../../../Preloader'
 import Card from '../../../../Card';
 

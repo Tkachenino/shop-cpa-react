@@ -2,7 +2,7 @@
 
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getItems} from '../../../actions/actionsCreators';
+import {getItems} from '../../../utils/api';
 import CatalogFilter from '../../Catalog/CatalogFilter'
 import CatalogMoreBtn from '../../Catalog/CatalogMoreBtn'
 import CatalogSearch from '../../Catalog/CatalogSearch'

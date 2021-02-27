@@ -1,10 +1,10 @@
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getItems} from '../../../../../actions/actionsCreators'
-import Preloader from '../../../../Preloader'
-import CatalogFilter from '../../../../Catalog/CatalogFilter'
-import CatalogMoreBtn from '../../../../Catalog/CatalogMoreBtn'
-import Card from '../../../../Card'
+import {getItems} from '../../../../../utils/api';
+import Preloader from '../../../../Preloader';
+import CatalogFilter from '../../../../Catalog/CatalogFilter';
+import CatalogMoreBtn from '../../../../Catalog/CatalogMoreBtn';
+import Card from '../../../../Card';
 
 const Catalog = () => {
   const {items, active, error, loading} = useSelector(store => store.catalog);

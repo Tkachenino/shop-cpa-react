@@ -1,5 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {getSearchItems, setSearch} from '../../actions/actionsCreators'
+import {setSearch} from '../../redux/Catalog/actionCreators';
+import {getSearchItems} from '../../utils/api';
 
 const CatalogSearch = () => {
   const {active, search} = useSelector(store => store.catalog);
