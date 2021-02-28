@@ -20,7 +20,6 @@ export const TopSalesReducer = (store = initalState, action) => {
       return {...store, loading: false, items}
     }
     case FETCH_TOP_SALES_FAILURE: {
-      // const {error} = action.payload.error;
       return {...store, loading: false, error: true}
     }
     default: {

@@ -53,7 +53,7 @@ export const getCategories = () => async(dispatch) => {
   } 
 }
 
-export const getItems = (categore = 1, search) => async(dispatch) => {
+export const getItems = (categore = 1, signal, search) => async(dispatch) => {
   try {
     dispatch(fetchItemsRequest());
     let fetchWay;
@@ -66,11 +66,14 @@ export const getItems = (categore = 1, search) => async(dispatch) => {
     if (search) {
       fetchWay += `&q=${search}`;
     }
-    const responce = await fetch(fetchWay)
+    const responce = await fetch(fetchWay, {signal})
     const items = await responce.json();
     dispatch(fetchItemsSuccess(items))
   } catch (error) {
-    dispatch(fetchItemsFailure(error))
+    if (error.message === 'The user aborted a request.') {
+    } else {
+      dispatch(fetchItemsFailure(error))
+    }
   } 
 }
 

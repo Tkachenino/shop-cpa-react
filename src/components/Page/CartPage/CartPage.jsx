@@ -84,7 +84,7 @@ const CartPage = () => {
                 <div className="card" style={{maxWidth: '30rem', margin: '0 auto'}}>
 
                     {loading && <Preloader />}
-                    {error && <FetchError request={() => {dispatch(sendOrder({
+                    {!loading && error && <FetchError request={() => {dispatch(sendOrder({
                         owner: {
                             phone: userData.phone,
                             address: userData.address,

@@ -13,11 +13,18 @@ import FetchError from '../../FetchError';
 
 
 const CatalogPage = () => { 
-  const {categories, items, active, error, loading, search} = useSelector(store => store.catalog);
+  const {categories, items, active, error, loading, loadingCategories, search} = useSelector(store => store.catalog);
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(getItems(active, search));
+    let controller = new AbortController();
+    let signal = controller.signal;
+    if (active) {
+      dispatch(getItems(active, signal, search));
+    }
+    return () => {
+      controller.abort();
+    }
   }, [active, dispatch])
 
 
@@ -31,9 +38,14 @@ const CatalogPage = () => {
               <CatalogSearch/>
               <CatalogFilter/>
 
-              {loading && <Preloader />}
-              {error && categories.length > 1 && <FetchError request={() => {dispatch(getItems(active, search))}} />}
-              {!loading && !error && categories.length > 1 && (
+              {(loading || loadingCategories) && <Preloader />}
+              {!(loading || loadingCategories) && error && categories.length > 1 && <FetchError
+               request={() => {
+                let controller = new AbortController();
+                let signal = controller.signal;
+                 dispatch(getItems(active,signal, search))
+                 }} />}
+              {!(loading || loadingCategories) && !error && categories.length > 1 && (
                 <>
                 <div className="row">
                 {items.map(item => (

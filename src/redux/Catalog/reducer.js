@@ -20,6 +20,7 @@ const initalState = {
   active: '',
   items: [],
   error: false,
+  loadingCategories: false,
   loading: false,
   isMoreItems: true,
   moreLoading: false,
@@ -29,14 +30,14 @@ const initalState = {
 export const CatalogReducer = (store = initalState, action) => {
   switch (action.type) {
     case FETCH_CATEGORIES_REQUEST: {
-      return {...store, active: 1, loading: true, error: false}
+      return {...store, loadingCategories: true, error: false}
     }
     case FETCH_CATEGORIES_SUCCESS: {
       const categories = action.payload.categories;
-      return {...store, loading: false, categories: [...initalState.categories,...categories]}
+      return {...store,  active: 1, loadingCategories: false, categories: [...initalState.categories,...categories]}
     }
     case FETCH_CATEGORIES_FAILURE: {
-      return {...store, loading: false, error: true}
+      return {...store, loadingCategories: false, error: true}
     }
     case CHANGE_ACTIVE_CATEGORY: {
       const id = action.payload.id;
