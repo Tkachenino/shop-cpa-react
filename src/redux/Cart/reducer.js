@@ -9,6 +9,7 @@ import {
 const initalState = {
   cartItems: JSON.parse(localStorage.getItem('cart')) || [],
   loading: false,
+  successOrder: false,
   error: null
 }
 
@@ -33,7 +34,7 @@ export const CartReducer = (store = initalState, action) => {
         localStorage.setItem('cart', JSON.stringify(newCartItems))
 
       }
-      return ({cartItems: newCartItems})
+      return ({...store, cartItems: newCartItems, successOrder: false})
     }
     case REMOVE_CART_IETMS: {
       const items = action.payload.items;
@@ -46,7 +47,7 @@ export const CartReducer = (store = initalState, action) => {
     }
     case FETCH_ORDER_SUCCESS: {
       localStorage.clear();
-      return {...initalState}
+      return {...initalState, cartItems: [], successOrder: true}
     }
     case FETCH_ORDER_FAILURE: {
       const error = action.payload.error;

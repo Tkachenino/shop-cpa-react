@@ -25,7 +25,7 @@ export function fetchCategoriesSuccess(categories) {
 }
 
 export function fetchCategoriesFailure(error) {
-  return {type: FETCH_CATEGORIES_FAILURE, payload: {error}}
+  return {type: FETCH_CATEGORIES_FAILURE}
 }
 
 export function changeActiveCategory(id) {

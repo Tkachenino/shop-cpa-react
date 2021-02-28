@@ -1,7 +1,8 @@
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getTopSales} from '../../../../../utils/api'
-import Preloader from '../../../../Preloader'
+import {getTopSales} from '../../../../../utils/api';
+import Preloader from '../../../../Preloader';
+import FetchError from '../../../../FetchError';
 import Card from '../../../../Card';
 
 const TopSales = () => {
@@ -17,7 +18,7 @@ const TopSales = () => {
 
       {loading && <Preloader />}
 
-      {error && <div>{error}</div>}
+      {error && <FetchError request={() => {dispatch(getTopSales())}}/>}
 
       {
         !loading && !error && (

@@ -2,12 +2,13 @@ import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getItems} from '../../../../../utils/api';
 import Preloader from '../../../../Preloader';
+import FetchError from '../../../../FetchError';
 import CatalogFilter from '../../../../Catalog/CatalogFilter';
 import CatalogMoreBtn from '../../../../Catalog/CatalogMoreBtn';
 import Card from '../../../../Card';
 
 const Catalog = () => {
-  const {items, active, error, loading} = useSelector(store => store.catalog);
+  const {categories, items, active, error, loading} = useSelector(store => store.catalog);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,8 +22,8 @@ const Catalog = () => {
     <CatalogFilter />
 
     {loading && <Preloader />}
-    {error && <div>{error}</div>}
-    {!loading && !error && (
+    {error && categories.length > 1 && <FetchError request={() => dispatch(getItems(active))} />}
+    {!loading && !error && categories.length > 1 && (
       <>
        <div className="row">
        {items.map(item => (

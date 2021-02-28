@@ -293,6 +293,24 @@ h2,
   color: #727e86;
 }
 
+.errorWrarpper {
+  border-radius: 10px;
+  border: 1px solid #ff9800;
+  background-color: #ffc1074d;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.successWrarpper {
+  border: 1px solid green;
+  background: #4caf509e;
+  color: black;
+  padding: 10px;
+  text-align: center;
+}
+
 .btn:disabled {
   pointer-events: none;
 }

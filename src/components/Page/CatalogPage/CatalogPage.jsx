@@ -3,15 +3,17 @@
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getItems} from '../../../utils/api';
-import CatalogFilter from '../../Catalog/CatalogFilter'
-import CatalogMoreBtn from '../../Catalog/CatalogMoreBtn'
-import CatalogSearch from '../../Catalog/CatalogSearch'
+import CatalogFilter from '../../Catalog/CatalogFilter';
+import CatalogMoreBtn from '../../Catalog/CatalogMoreBtn';
+import CatalogSearch from '../../Catalog/CatalogSearch';
 import Card from '../../Card';
 import Banner from '../../Banner';
-import Preloader from '../../Preloader'
+import Preloader from '../../Preloader';
+import FetchError from '../../FetchError';
+
 
 const CatalogPage = () => { 
-  const {items, active, error, loading, search} = useSelector(store => store.catalog);
+  const {categories, items, active, error, loading, search} = useSelector(store => store.catalog);
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -30,8 +32,8 @@ const CatalogPage = () => {
               <CatalogFilter/>
 
               {loading && <Preloader />}
-              {error && <div>{error}</div>}
-              {!loading && !error && (
+              {error && categories.length > 1 && <FetchError request={() => {dispatch(getItems(active, search))}} />}
+              {!loading && !error && categories.length > 1 && (
                 <>
                 <div className="row">
                 {items.map(item => (

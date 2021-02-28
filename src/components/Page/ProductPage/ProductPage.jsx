@@ -3,10 +3,11 @@ import {useHistory, useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeSizeItem, changeCountItem} from '../../../redux/Product/actionCreators';
 import {setCartItems} from '../../../redux/Cart/actionCreators';
-
 import {getItem} from '../../../utils/api';
 import Banner from '../../Banner';
 import Preloader from '../../Preloader';
+import FetchError from '../../FetchError';
+
 
 const ProductPage = () => {
     const history = useHistory();
@@ -31,7 +32,8 @@ const ProductPage = () => {
                 <section className="catalog-item">
 
                 {loading && <Preloader />}
-                {error && <div>{error}</div>}
+                {error && <FetchError request={() => dispatch(getItem(id))} />}
+                
                 {!loading && !error && (
                     <>
                       <h2 className="text-center">{item.title}</h2>

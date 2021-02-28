@@ -13,5 +13,5 @@ export function fetchTopSalesSuccess(items) {
 }
 
 export function fetchTopSalesFailure(error) {
-  return {type: FETCH_TOP_SALES_FAILURE, payload: {error}}
+  return {type: FETCH_TOP_SALES_FAILURE}
 }

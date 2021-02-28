@@ -37,8 +37,8 @@ export const getTopSales = () => async(dispatch) => {
     const respone = await fetch('http://localhost:7070/api/top-sales');
     const items = await respone.json();
     dispatch(fetchTopSalesSuccess(items))
-  } catch (error) {
-    dispatch(fetchTopSalesFailure(error))
+  } catch (e) {
+    dispatch(fetchTopSalesFailure(e))
   } 
 }
 
@@ -109,7 +109,7 @@ export const getSearchItems = (categore = 1, search) => async(dispatch) => {
     
     dispatch(fetchSearchItemsSuccess(items))
   } catch (error) {
-    dispatch(fetchSearchItemsFailure(error))
+       dispatch(fetchSearchItemsFailure(error))
   } 
 }
 
@@ -120,27 +120,26 @@ export const getItem = (id) => async(dispatch) => {
     const item = await responce.json();
     dispatch(fetchItemSuccess(item))
   } catch (error) {
-    dispatch(fetchItemFailure(error))
+      dispatch(fetchItemFailure(error))
   }  
 }
 
 export const sendOrder = (order) => async(dispatch) => {
   try {
     dispatch(fetchOrderRequest());
-      await fetch(`http://localhost:7070/api/order`, {
+      const responce = await fetch(`http://localhost:7070/api/order`, {
       method: "POST",
-      mode: 'no-cors',
       body: JSON.stringify({
         ...order
-      }),
-      headers: {
-        "Origin": "*"
-      }
+      })
     });
-    
-      dispatch(fetchOrderSuccess())
 
+    if (responce.status === 204) {
+      dispatch(fetchOrderSuccess())
+    } else {
+      throw new Error('status not 204')
+    }
   } catch (error) {
-    dispatch(fetchOrderFailure('error'))
+      dispatch(fetchOrderFailure(error))
   }  
 }

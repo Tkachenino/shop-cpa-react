@@ -29,10 +29,10 @@ const fortune = (ctx, body = null, status = 200) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             // Uncomment for error generation
-            // if (Math.random() > 0.8) {
-            //     reject(new Error('Something bad happened'));
-            //     return;
-            // }
+            if (Math.random() > 0.5) {
+                reject(new Error('Something bad happened'));
+                return;
+            }
 
             ctx.response.status = status;
             ctx.response.body = body;
@@ -111,7 +111,7 @@ router.post('/api/order', async (ctx, next) => {
         return fortune(ctx, 'Bad Request', 400);
     }
 
-    return fortune(ctx, null, 204);
+    return fortune(ctx, 'order done', 204);
 });
 
 app.use(router.routes())

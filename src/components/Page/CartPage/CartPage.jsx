@@ -5,9 +5,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {removeCartItems} from '../../../redux/Cart/actionCreators';
 import {sendOrder} from '../../../utils/api';
 import Preloader from '../../Preloader';
+import FetchError from '../../FetchError';
+
 
 const CartPage = () => {
-  const { cartItems, loading, error } = useSelector(store => store.cart);
+  const { cartItems, loading, error, successOrder } = useSelector(store => store.cart);
   const dispatch = useDispatch();
 
   const [userData, setUserData] = useState({address: '', phone: '', access: false});
@@ -82,9 +84,22 @@ const CartPage = () => {
                 <div className="card" style={{maxWidth: '30rem', margin: '0 auto'}}>
 
                     {loading && <Preloader />}
-                    {error && <div>{error}</div>}
+                    {error && <FetchError request={() => {dispatch(sendOrder({
+                        owner: {
+                            phone: userData.phone,
+                            address: userData.address,
+                        },
+                        items: cartItems
+                    }))}}/>}
 
-                    {!loading && !error && (
+                    {successOrder && (
+                        <div className='successWrarpper'>
+                            Поздравляем, Ваш заказ успшено принят!!!<br/>
+                            Что бы сформировать Ваш новый заказ, просто добавьте новый <NavLink to='/catalog'>товар</NavLink>
+                        </div>
+                    )}
+
+                    {!loading && !error && !successOrder && (
                     <form className="card-body" onSubmit={submitData}>
                         <div className="form-group">
                             <label htmlFor="phone">Телефон</label>

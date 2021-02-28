@@ -2,10 +2,11 @@ import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeActiveCategory} from '../../redux/Catalog/actionCreators';
 import {getCategories} from '../../utils/api';
+import FetchError from '../FetchError';
 
 
 const CatalogFilter = () => {
-    const {categories, active, error, loading} = useSelector(store => store.catalog);
+    const {categories, active, loading} = useSelector(store => store.catalog);
     const dispatch = useDispatch();
     useEffect(() => {
     dispatch(getCategories());
@@ -18,8 +19,12 @@ const CatalogFilter = () => {
 
   return (
       <>
+      { categories.length <= 1 && (
+          <FetchError request={() => dispatch(getCategories())} />
+      )}
+
       {
-        !loading && !error && (
+        !loading && categories.length > 1 && (
         <ul className="catalog-categories nav justify-content-center">
         {categories.map(category => (
             <li className="nav-item" key={category.id}>

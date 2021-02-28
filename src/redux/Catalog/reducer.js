@@ -17,9 +17,9 @@ import {
 
 const initalState = {
   categories: [{id: 1, title: 'Все'}],
-  active: 1,
+  active: '',
   items: [],
-  error: null,
+  error: false,
   loading: false,
   isMoreItems: true,
   moreLoading: false,
@@ -29,22 +29,21 @@ const initalState = {
 export const CatalogReducer = (store = initalState, action) => {
   switch (action.type) {
     case FETCH_CATEGORIES_REQUEST: {
-      return {...store, loading: true, error: null}
+      return {...store, active: 1, loading: true, error: false}
     }
     case FETCH_CATEGORIES_SUCCESS: {
       const categories = action.payload.categories;
       return {...store, loading: false, categories: [...initalState.categories,...categories]}
     }
     case FETCH_CATEGORIES_FAILURE: {
-      const error = action.payload.error;
-      return {...store, loading: false, error}
+      return {...store, loading: false, error: true}
     }
     case CHANGE_ACTIVE_CATEGORY: {
       const id = action.payload.id;
       return {...store, active: id}
     }
     case FETCH_ITEMS_REQUEST: {
-      return {...store, loading: true, error: null}
+      return {...store, loading: true, error: false}
     }
     case FETCH_ITEMS_SUCCESS: {
       const items = action.payload.items;
@@ -52,11 +51,10 @@ export const CatalogReducer = (store = initalState, action) => {
       return {...store, loading: false, items, isMoreItems: isMoreitemsFLag}
     }
     case FETCH_ITEMS_FAILURE: {
-      const {error} = action.payload.error;
-      return {...store, loading: false, error}
+      return {...store, loading: false, error: true}
     }
     case FETCH_MORE_ITEMS_REQUEST: {
-      return {...store, moreLoading: true, error: null}
+      return {...store, moreLoading: true, error: false}
     }
     case FETCH_MORE_ITEMS_SUCCESS: {
       const items = action.payload.items;
@@ -64,11 +62,10 @@ export const CatalogReducer = (store = initalState, action) => {
       return {...store, moreLoading: false, items: [...store.items, ...items], isMoreItems: isMoreitemsFLag}
     }
     case FETCH_MORE_ITEMS_FAILURE: {
-      const {error} = action.payload.error;
-      return {...store, moreLoading: false, error}
+      return {...store, moreLoading: false}
     }
     case FETCH_SEARCH_ITEMS_REQUEST: {
-      return {...store, loading: true, error: null}
+      return {...store, loading: true, error: false}
     }
     case FETCH_SEARCH_ITEMS_SUCCESS: {
       const items = action.payload.items;
@@ -76,8 +73,7 @@ export const CatalogReducer = (store = initalState, action) => {
       return {...store, loading: false, items: [...items], isMoreItems: isMoreitemsFLag}
     }
     case FETCH_SEARCH_ITEMS_FAILURE: {
-      const error = action.payload.error;
-      return {...store, loading: false, error}
+      return {...store, loading: false, error: true}
     }
     case SET_SEARCH: {
       const {search} = action.payload;
